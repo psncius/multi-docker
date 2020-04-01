@@ -20,3 +20,18 @@ after_success:
   - docker push psncius/multi-nginx
   - docker push psncius/multi-server
   - docker push psncius/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  reg;ion: us-east-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-1-272149731292
+  bucket_path: docker-multi
+  deploy:
+    edge: true
+    provider: elasticbeanstalk
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
